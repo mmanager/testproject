@@ -1,0 +1,23 @@
+{% extends  "base.html" %}
+
+{% block "content" %}
+<h1>Test Page</h1>
+<table class="main_table">
+	<tr>
+		<th>First Name:</th>
+		<td>{{info.first_name}}</td>
+	</tr>
+	<tr>
+		<th>Last Name:</th>
+		<td>{{info.last_name}}</td>
+	</tr>
+	<tr>
+		<th>Bio:</th>
+		<td>{{info.bio}}</td>
+	</tr>
+	<tr>
+		<th>Contacts:</th>
+		<td>{{info.contacts}}</td>
+	</tr>
+</table>
+{% endblock %}
