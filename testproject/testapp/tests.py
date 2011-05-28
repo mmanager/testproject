@@ -125,9 +125,10 @@ class TestHTTP(HttpTestCase):
 		self.find('42 Coffee Cups Test Assignment')
 		
 		self.go200('/last-requests/')
-		self.url('/last-requests/')
+		resp = self.url('/last-requests/')
 		self.find('last-requests')
-		
+
+
 	def test_static(self):
 		self.go(settings.MEDIA_URL)
 		self.code(404)
@@ -136,5 +137,14 @@ class TestHTTP(HttpTestCase):
 		self.code(404)
 
 		self.go(settings.MEDIA_URL + 'css/styles.css')
-		self.code(200)		
+		self.code(200)	
+		
 
+from django.test import TestCase
+
+class TestContext(TestCase):
+	def test_index(self):
+		resp = self.client.get('/')
+		self.assertTrue('settings' in resp.context)
+		self.assertEqual(settings.MEDIA_URL, resp.context['settings'].MEDIA_URL)
+		

@@ -2,6 +2,8 @@
 import os
 PRJ_ROOT = os.path.dirname(__file__)
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -92,6 +94,10 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS += (
+	'testapp.context.add_settings_context_processor',
 )
 
 MIDDLEWARE_CLASSES = (
