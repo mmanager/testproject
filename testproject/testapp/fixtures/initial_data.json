@@ -1,0 +1,16 @@
+[
+    {
+        "pk": 1, 
+        "model": "testapp.inforecord", 
+        "fields": {
+            "bio": "Something like bio", 
+            "first_name": "Anatoliy", 
+            "last_name": "Ivanoff", 
+            "other_contacts": "Other contacts", 
+            "birthdate": "2011-05-12", 
+            "skype": "skype_id", 
+            "jabber": "jid@jabber.org", 
+            "email": "email@domain.com"
+        }
+    }
+]

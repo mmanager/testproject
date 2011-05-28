@@ -1,23 +1,52 @@
 {% extends  "base.html" %}
 
 {% block "content" %}
-<h1>Test Page</h1>
-<table class="main_table">
-	<tr>
-		<th>First Name:</th>
-		<td>{{info.first_name}}</td>
-	</tr>
-	<tr>
-		<th>Last Name:</th>
-		<td>{{info.last_name}}</td>
-	</tr>
-	<tr>
-		<th>Bio:</th>
-		<td>{{info.bio}}</td>
-	</tr>
-	<tr>
-		<th>Contacts:</th>
-		<td>{{info.contacts}}</td>
-	</tr>
-</table>
+<h1>42 Coffee Cups Test Assignment</h1>
+<div class="left">
+	<table>
+		<tr>
+			<th>Name:</th>
+			<td>{{info.first_name}}</td>
+			
+		</tr>
+		<tr>
+			<th>Last Name:</th>
+			<td>{{info.last_name}}</td>
+		</tr>
+		<tr>
+			<th>Date of Birth:</th>
+			<td>{{info.birthdate|date:"d.m.Y"}}</td>
+		</tr>
+		<tr>
+			<th colspan="2">Bio:</th>
+		</tr>
+		<tr>
+			<td colspan="2">{{info.bio}}</td>
+		</tr>
+	</table>
+</div>
+<div class="right">
+	<strong>Contacts</strong>
+	<table>
+		<tr>
+			<th>Email:</th>
+			<td>{{info.email}}</th>
+		</tr>
+		<tr>
+			<th>Jabber:</th>
+			<td>{{info.jabber}}</td>
+		</tr>
+		<tr>
+			<th>Skype:</th>
+			<td>{{info.skype}}</td>
+		</tr>
+		<tr>
+			<th colspan="2">Other contacts:</th>
+		</tr>
+		<tr>
+			<td colspan="">{{info.other_contacts}}</td>
+		</tr>
+	</table>
+</div>
+<div class="bothclear">&nbsp;</div>
 {% endblock %}

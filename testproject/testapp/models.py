@@ -11,8 +11,14 @@ class InfoRecord(models.Model):
 	"""
 	first_name = models.CharField(_(u'First Name'), max_length=100)
 	last_name = models.CharField(_(u'Last Name'), max_length=100)
+	birthdate = models.DateField(_(u'Date of Biarth'))	
 	bio = models.TextField(_(u'Bio'))
-	contacts = models.TextField(_(u'Contacts'))
+	
+	#contacts
+	email = models.EmailField(_(u'Email'))
+	jabber = models.CharField(_(u'Jabber ID'), max_length=255)
+	skype = models.CharField(_(u'Skype'), max_length=255)
+	other_contacts = models.TextField(_(u'Contacts'))
 	
 	class Meta(object):
 		verbose_name = _(u'Info record')

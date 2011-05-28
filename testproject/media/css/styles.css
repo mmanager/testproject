@@ -1,1 +1,19 @@
 @charset "utf-8";
+
+.bothclear {
+	clear: both;
+}
+
+div.left {
+	float: left;
+	width: 400px;
+}
+
+div.right {
+	float: left;
+}
+
+div.left table tr th, 
+div.right table tr th {
+	text-align: left;
+}
