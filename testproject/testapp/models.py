@@ -2,6 +2,8 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+import datetime
+
 
 # Create your models here.
 
@@ -26,3 +28,20 @@ class InfoRecord(models.Model):
 	
 	def __unicode__(self):
 		return u'%s %s' % (self.first_name, self.last_name)
+
+class RequestStore(models.Model):
+	"""
+		This model contains all http requests
+	"""
+	req_date = models.DateTimeField(_(u'Request date'), default=datetime.datetime.now)
+	req_method = models.CharField(_(u'Request method'), max_length=20)
+	req_path = models.CharField(_(u'Request path'), max_length=255)
+	
+	class Meta(object):
+		verbose_name = _(u'Request record')
+		verbose_name_plural = _(u'Requests records')
+	
+	def __unicode__(self):
+		return u'[%s] %s %s' % (self.req_date.strftime('%d.%m.%Y %H:%M:%S'), self.req_method, self.req_path)
+	
+	

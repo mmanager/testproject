@@ -1,6 +1,7 @@
 {% extends  "base.html" %}
 
 {% block "content" %}
+<a href="{% url last_requests_page %}">View last 10 requests</a>
 <h1>42 Coffee Cups Test Assignment</h1>
 <div class="left">
 	<table>
@@ -49,4 +50,5 @@
 	</table>
 </div>
 <div class="bothclear">&nbsp;</div>
+
 {% endblock %}
