@@ -1,7 +1,7 @@
 {% extends  "base.html" %}
 
 {% block "content" %}
-<a href="{% url last_requests_page %}">View last 10 requests</a>
+<a href="{% url testapp-last_requests_page %}">View last 10 requests</a>{% if user.is_authenticated %} | <a href="/accounts/logout">Logout</a>{% endif %}
 <h1>42 Coffee Cups Test Assignment</h1>
 <div class="left">
 	<table>
@@ -31,7 +31,7 @@
 	<table>
 		<tr>
 			<th>Email:</th>
-			<td>{{info.email}}</th>
+			<td>{{info.email}}</td>
 		</tr>
 		<tr>
 			<th>Jabber:</th>
@@ -45,9 +45,10 @@
 			<th colspan="2">Other contacts:</th>
 		</tr>
 		<tr>
-			<td colspan="">{{info.other_contacts}}</td>
+			<td colspan="2">{{info.other_contacts}}</td>
 		</tr>
 	</table>
 </div>
 <div class="bothclear">&nbsp;</div>
+<a href="{% url testapp-edit-startpage %}">Edit this page</a>
 {% endblock %}

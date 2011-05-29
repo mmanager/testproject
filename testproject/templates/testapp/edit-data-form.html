@@ -1,0 +1,80 @@
+{% extends  "base.html" %}
+
+{% block "content" %}
+<a href="{% url testapp_startpage %}">Startpage</a> | <a href="{% url testapp-last_requests_page %}">View last 10 requests</a>
+<h1>42 Coffee Cups Test Assignment</h1>
+<form method="post" action="{% url testapp-edit-startpage %}" name="edit-form">
+{% csrf_token %}
+<div class="left">
+	<table>
+		<tr>
+			<th><label for="id_first_name">Name:</label></th>
+			<td>
+				<div class="error">{{form.first_name.errors}}</div>
+				<div class="field">{{form.first_name}}</div>
+			</td>
+			
+		</tr>
+		<tr>
+			<th><label for="id_last_name">Last Name:</label></th>
+			<td>
+				<div class="error">{{form.last_name.errors}}</div>
+				<div class="field">{{form.last_name}}</div>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="id_birthdate">Date of Birth:</label></th>
+			<td>
+				<div class="error">{{form.birthdate.errors}}</div>
+				<div class="field">{{form.birthdate}}</div>
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2"><label for="id_bio">Bio:</label></th>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div class="error">{{form.bio.errors}}</div>
+				<div class="field">{{form.bio}}</div>				
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="right">
+	<table>
+		<tr>
+			<th><label for="id_email">Email:</label></th>
+			<td>
+				<div class="error">{{form.email.errors}}</div>
+				<div class="field">{{form.email}}</div>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="id_jabber">Jabber:</label></th>
+			<td>
+				<div class="error">{{form.jabber.errors}}</div>
+				<div class="field">{{form.jabber}}</div>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="id_skype">Skype:</label></th>
+			<td>
+				<div class="error">{{form.skype.errors}}</div>
+				<div class="field">{{form.skype}}</div>
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2"><label for="id_other_contacts">Other contacts:</label></th>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div class="error">{{form.other_contacts.errors}}</div>
+				<div class="field">{{form.other_contacts}}</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="bothclear">&nbsp;</div>
+<button type="submit">Save</button>&nbsp;&nbsp;<a href="{% url testapp_startpage %}">Cancel</a>
+</form>
+{% endblock %}

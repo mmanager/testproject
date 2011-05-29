@@ -1,0 +1,12 @@
+{% extends  "base.html" %}
+
+{% block "content" %}
+<a href="{% url testapp_startpage %}">To startpage</a>
+<h1>42 Coffee Cups Test Assignment</h1>
+<h2>Last 10 requests</h2>
+<ol>
+{% for item in requests %}
+	<li>[{{item.req_date|date:"d.m.Y h:i:s"}}] {{item.req_method}} {{item.req_path}}</li>
+{% endfor %}
+</ol>
+{% endblock %}
