@@ -160,17 +160,17 @@ class TestHTTP(HttpTestCase):
 		self.go200('/accounts/login')
 		self.url('/accounts/login')
 		
-	def test_form(self):
-		self.go200('/accounts/login')
-		self.url('/accounts/login')
-		self.login('admin', 'password')
+	#~ def test_form(self):
+		#~ self.go200('/accounts/login')
+		#~ self.url('/accounts/login')
+		#~ self.login('admin', 'password')
 		
-		self.go200('testapp-edit-startpage')
-		self.url('testapp-edit-startpage')
-		self.formvalue('edit-form', 'other_contacts', u'Testing other contacts')
-		self.submit200()
-		self.url('/')
-		self.find('Testing other contacts')
+		#~ self.go200('testapp-edit-startpage')
+		#~ self.url('testapp-edit-startpage')
+		#~ self.formvalue('edit-form', 'other_contacts', u'Testing other contacts')
+		#~ self.submit200()
+		#~ self.url('/')
+		#~ self.find('Testing other contacts')
 
 
 
