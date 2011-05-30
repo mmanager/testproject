@@ -54,17 +54,39 @@ def edit_startpage(request):
 	"""
 		View that allow to edit startpage data
 	"""
+	#~ from forms import StartpageEditForm
+	
+	
+	#~ info = get_object_or_404(InfoRecord, pk=1)
+	#~ form = StartpageEditForm(instance=info)
+	#~ if request.method == 'POST':
+		#~ form = StartpageEditForm(request.POST, instance=info)
+		#~ if form.is_valid():
+			#~ form.save()
+			#~ return HttpResponseRedirect(reverse('testapp_startpage'))
+			
+	return render_to_response('testapp/edit-data-form.html',
+						{
+						}, context_instance=RequestContext(request)
+	)
+
+@login_required
+def ajax_edit_startpage(request):
 	from forms import StartpageEditForm
 	
+	msg = u''
 	info = get_object_or_404(InfoRecord, pk=1)
 	form = StartpageEditForm(instance=info)
 	if request.method == 'POST':
 		form = StartpageEditForm(request.POST, instance=info)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect(reverse('testapp_startpage'))
+			msg = u'Data stored. <a href="/">View results</a><br><br>'
 			
-	return render_to_response('testapp/edit-data-form.html',
+	return render_to_response('testapp/ajax-edit-data-form.html',
 						{'form': form,
+						  'msg': msg,
 						}, context_instance=RequestContext(request)
 	)
+	
+	

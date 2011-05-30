@@ -5,6 +5,7 @@ urlpatterns = patterns('testapp.views',
 	url('^$', 'startpage', name='testapp_startpage'),
 	url('^last-requests/$', 'show_last_requests', name='testapp-last_requests_page'),
 	url('^edit-startpage/$', 'edit_startpage', name='testapp-edit-startpage'),
+	url('^ajax-edit-startpage/$', 'ajax_edit_startpage', name='testapp-ajax-edit-startpage'),
 )
 
 urlpatterns += patterns('',
