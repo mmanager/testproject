@@ -16,5 +16,13 @@
             "email": "admin@textproject.tst", 
             "date_joined": "2011-05-28 12:09:38"
         }
-    }
+    },
+    {
+        "pk": 1, 
+        "model": "sites.site", 
+        "fields": {
+            "domain": "example.com", 
+            "name": "example.com"
+        }
+    }    
 ]
