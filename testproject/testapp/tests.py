@@ -151,13 +151,13 @@ class TestHTTP(HttpTestCase):
 		self.go200('/accounts/login')
 		self.url('/accounts/login')
 		
-		self.login('admin', 'password')
+		self.login('admin', 'admin')
 		self.go200('/')
 		self.url('/')
 		self.find('Logout')
 
 	def test_logout(self):
-		self.login('admin', 'password')
+		self.login('admin', 'admin')
 
 		self.go200('/')
 		self.find('Logout')
