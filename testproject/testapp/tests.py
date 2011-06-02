@@ -159,6 +159,21 @@ class TestHTTP(HttpTestCase):
 
 		self.go200('/accounts/login')
 		self.url('/accounts/login')
+	
+	def test_db_data_at_page(self):
+		record = InfoRecord.objects.create(first_name=TEST_FIRST_NAME,
+							 last_name=TEST_LAST_NAME,
+							 bio=TEST_BIO,
+							 birthdate=TEST_BIRTH_DATE,
+							 email=TEST_EMAIL,
+							 jabber=TEST_JABBER,
+							 skype=TEST_SKYPE,
+							 other_contacts=TEST_OTHER_CONTACTS
+							 )
+		self.go200('/')
+		self.find(TEST_EMAIL)
+		self.find(TEST_JABBER)
+		
 		
 	#~ def test_form(self):
 		#~ self.go200('/accounts/login')
@@ -181,4 +196,18 @@ class TestContext(TestCase):
 		resp = self.client.get('/')
 		self.assertTrue('settings' in resp.context)
 		self.assertEqual(settings.MEDIA_URL, resp.context['settings'].MEDIA_URL)
+	
+	def test_db_data_in_context(self):
+		record = InfoRecord.objects.create(first_name=TEST_FIRST_NAME,
+							 last_name=TEST_LAST_NAME,
+							 bio=TEST_BIO,
+							 birthdate=TEST_BIRTH_DATE,
+							 email=TEST_EMAIL,
+							 jabber=TEST_JABBER,
+							 skype=TEST_SKYPE,
+							 other_contacts=TEST_OTHER_CONTACTS
+							 )
+		resp = self.client.get('/')
+		self.assertTrue('info' in resp.context)
+		self.assertEqual(resp.context['info'].email, TEST_EMAIL)
 		
