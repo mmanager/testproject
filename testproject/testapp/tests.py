@@ -132,6 +132,7 @@ class TestHTTP(HttpTestCase):
 		
 		self.go200('/last-requests/')
 		resp = self.url('/last-requests/')
+		self.find('/last-requests/')
 		self.find('path-1')
 		self.notfind('/path-0/')
 
