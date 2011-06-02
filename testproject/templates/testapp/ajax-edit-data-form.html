@@ -1,0 +1,107 @@
+<script type="text/javascript" src="/media/js/jquery.js"></script>
+<script type="text/javascript" src="/media/js/jquery.ui.js"></script>
+<script type="text/javascript" src="/media/js/jquery.form.js"></script>
+
+<script type="text/javascript">
+	var form_options = {
+		target: "#form_container",
+		success: show_edit_form_response,
+		url: '{% url testapp-ajax-edit-startpage %}'
+	};
+
+	  function disable() {
+		$('input').attr('disabled', 'disabled');
+		$('textarea').attr('disabled', 'disabled');
+		$('button').attr('disabled', 'disabled');
+	  }
+
+	function show_edit_form_response(responseText)
+	{
+		$('#form_container').html(responseText);
+	};
+	
+	$('#form_subm_btn').click(
+		function ()
+		{
+			$('#msg').html('Saving form...');
+			$('#id_edit_form').ajaxSubmit(form_options);
+			disable();
+		}
+	);
+</script>
+<div id="msg">{{msg|safe}}</div>
+<form method="post" action="{% url testapp-edit-startpage %}" name="edit-form" id="id_edit_form">
+{% csrf_token %}
+<div class="left">
+	<table>
+		<tr>
+			<th colspan="2"><label for="id_bio">Bio:</label></th>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div class="error">{{form.bio.errors}}</div>
+				<div class="field">{{form.bio}}</div>				
+			</td>
+		</tr>
+		<tr>
+			<th><label for="id_birthdate">Date of Birth:</label></th>
+			<td>
+				<div class="error">{{form.birthdate.errors}}</div>				
+				<div class="field">{{form.birthdate}}</div>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="id_last_name">Last Name:</label></th>
+			<td>
+				<div class="error">{{form.last_name.errors}}</div>
+				<div class="field">{{form.last_name}}</div>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="id_first_name">Name:</label></th>
+			<td>
+				<div class="error">{{form.first_name.errors}}</div>
+				<div class="field">{{form.first_name}}</div>
+			</td>
+			
+		</tr>
+	</table>
+</div>
+<div class="right">
+	<table>
+		<tr>
+			<th colspan="2"><label for="id_other_contacts">Other contacts:</label></th>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div class="error">{{form.other_contacts.errors}}</div>
+				<div class="field">{{form.other_contacts}}</div>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="id_skype">Skype:</label></th>
+			<td>
+				<div class="error">{{form.skype.errors}}</div>
+				<div class="field">{{form.skype}}</div>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="id_jabber">Jabber:</label></th>
+			<td>
+				<div class="error">{{form.jabber.errors}}</div>
+				<div class="field">{{form.jabber}}</div>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="id_email">Email:</label></th>
+			<td>
+				<div class="error">{{form.email.errors}}</div>
+				<div class="field">{{form.email}}</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="bothclear">&nbsp;</div>
+
+<button type="button" id="form_subm_btn">Save</button>&nbsp;&nbsp;<a href="{% url testapp_startpage %}">Cancel</a>
+</form>
