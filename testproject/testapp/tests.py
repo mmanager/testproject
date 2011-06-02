@@ -124,10 +124,14 @@ class TestHTTP(HttpTestCase):
 		self.go200('/')
 		self.url('/')
 		self.find('42 Coffee Cups Test Assignment')
-		
+	
+	def test_last_requests(self):
 		self.go200('/last-requests/')
 		resp = self.url('/last-requests/')
 		self.find('last-requests')
+		self.find('/media/css/styles.css')
+		self.find('/last-requests/')
+		self.find('/last-requests/')		
 
 
 	def test_static(self):
