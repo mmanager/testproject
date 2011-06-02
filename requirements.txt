@@ -1,1 +1,1 @@
-/home/me/testproject/testproject/requirements.txt
+testproject/requirements.txt
