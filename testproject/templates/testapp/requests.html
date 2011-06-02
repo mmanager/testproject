@@ -6,7 +6,7 @@
 <h2>Last 10 requests</h2>
 <ol>
 {% for item in requests %}
-	<li>[{{item.req_date|date:"d.m.Y h:i:s"}}] {{item.req_method}} {{item.req_path}}</li>
+	<li>[{{item.req_date|date:"d.m.Y h:i:s"}}] {{item.req_method}} {{item.req_path}} priority: {{item.req_priority}}</li>
 {% endfor %}
 </ol>
 {% endblock %}
