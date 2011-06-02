@@ -156,3 +156,4 @@ LOGGING = {
 }
 
 LOGIN_REDIRECT_URL = '/edit-startpage/'
+REQ_STORE_DEFAULT_PRIORITY = 1

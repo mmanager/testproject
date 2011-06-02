@@ -8,6 +8,7 @@ from django.utils.encoding import smart_unicode
 
 from django.db.models import signals
 from django.dispatch import receiver
+import testproject.settings as settings
 
 
 # Create your models here.
@@ -38,6 +39,7 @@ class RequestStore(models.Model):
 	"""
 		This model contains all http requests
 	"""
+	req_priority = models.IntegerField(_(u'Priority'), default=settings.REQ_STORE_DEFAULT_PRIORITY)
 	req_date = models.DateTimeField(_(u'Request date'), default=datetime.datetime.now)
 	req_method = models.CharField(_(u'Request method'), max_length=20)
 	req_path = models.CharField(_(u'Request path'), max_length=255)
@@ -45,6 +47,7 @@ class RequestStore(models.Model):
 	class Meta(object):
 		verbose_name = _(u'Request record')
 		verbose_name_plural = _(u'Requests records')
+		ordering = ('-req_date', )
 	
 	def __unicode__(self):
 		return u'[%s] %s %s' % (self.req_date.strftime('%d.%m.%Y %H:%M:%S'), self.req_method, self.req_path)
