@@ -126,12 +126,14 @@ class TestHTTP(HttpTestCase):
 		self.find('42 Coffee Cups Test Assignment')
 	
 	def test_last_requests(self):
+		for i in xrange(10):
+			path = '/path-%d/' % i
+			record = RequestStore.objects.create(req_method='GET', req_path=path)
+		
 		self.go200('/last-requests/')
 		resp = self.url('/last-requests/')
 		self.find('last-requests')
-		self.find('/media/css/styles.css')
-		self.find('/last-requests/')
-		self.find('/last-requests/')		
+		self.notfind('/path-0/')
 
 
 	def test_static(self):
