@@ -1,5 +1,5 @@
 {% extends  "base.html" %}
-
+{% load testapp_basic_tags %}
 {% block "content" %}
 <a href="{% url testapp-last_requests_page %}">View last 10 requests</a>{% if user.is_authenticated %} | <a href="/accounts/logout">Logout</a>{% endif %}
 <h1>42 Coffee Cups Test Assignment</h1>
@@ -50,5 +50,5 @@
 	</table>
 </div>
 <div class="bothclear">&nbsp;</div>
-<a href="{% url testapp-edit-startpage %}">Edit this page</a>
+<a href="{% url testapp-edit-startpage %}">Edit this page</a> | <a href="{% edit_link info %}">admin</a>
 {% endblock %}
