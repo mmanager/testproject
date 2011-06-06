@@ -89,4 +89,32 @@ def ajax_edit_startpage(request):
 						}, context_instance=RequestContext(request)
 	)
 	
+
+@login_required
+def edit_startpage_reversed(request):
+	"""
+		View that allow to edit startpage data
+	"""
+	return render_to_response('testapp/edit-data-form-reverse.html',
+						{
+						}, context_instance=RequestContext(request)
+	)
+
+@login_required
+def ajax_edit_startpage_reversed(request):
+	from forms import StartpageEditFormReversed
 	
+	msg = u''
+	info = get_object_or_404(InfoRecord, pk=1)
+	form = StartpageEditFormReversed(instance=info)
+	if request.method == 'POST':
+		form = StartpageEditFormReversed(request.POST, instance=info)
+		if form.is_valid():
+			form.save()
+			msg = u'Data stored. <a href="/">View results</a><br><br>'
+			
+	return render_to_response('testapp/ajax-edit-data-form-reversed.html',
+						{'form': form,
+						  'msg': msg,
+						}, context_instance=RequestContext(request)
+	)
