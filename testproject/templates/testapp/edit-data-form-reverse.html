@@ -1,0 +1,21 @@
+{% extends  "base.html" %}
+
+{% block "head" %}
+<link rel="stylesheet" href="/media/css/ui-lightness/jquery-ui.css" type="text/css">
+<script type="text/javascript" src="/media/js/jquery.js"></script>
+<script type="text/javascript" src="/media/js/jquery.ui.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$('#reverse_form_container').load('{% url testapp-ajax-edit-startpage_reversed %}');
+	});
+</script>
+{% endblock %}
+
+
+{% block "content" %}
+<a href="{% url testapp_startpage %}">Startpage</a> | <a href="{% url testapp-last_requests_page %}">View last 10 requests</a>
+<h1>42 Coffee Cups Test Assignment</h1>
+<div id="reverse_form_container">
+loading form...
+</div>
+{% endblock %}
