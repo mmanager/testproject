@@ -3,6 +3,9 @@ from tddspry.django import DatabaseTestCase
 from tddspry.django import HttpTestCase
 from tddspry.django.helpers import *
 
+from django.template import Context, Template
+
+
 import settings
 from testproject.testapp.models import InfoRecord, RequestStore
 import datetime
@@ -217,4 +220,27 @@ class TestContext(TestCase):
 		resp = self.client.get('/')
 		self.assertTrue('info' in resp.context)
 		self.assertEqual(resp.context['info'].email, TEST_EMAIL)
+
+class TestCustomTemplateTags(TestCase):
+	"""
+		testing custom template tags
+	"""
+	def render_template(self, tmpl_text, context):
+		t = Template(tmpl_text)
+		return t.render(context)
 		
+	def test_admin_link_tag(self):
+		tmpl = u'{% load testapp_basic_tags %}{% edit_link info %}'
+		for i in xrange(10):
+			record = InfoRecord.objects.create(first_name=TEST_FIRST_NAME,
+								 last_name=TEST_LAST_NAME,
+								 bio=TEST_BIO,
+								 birthdate=TEST_BIRTH_DATE,
+								 email=TEST_EMAIL,
+								 jabber=TEST_JABBER,
+								 skype=TEST_SKYPE,
+								 other_contacts=TEST_OTHER_CONTACTS
+								 )
+			context = Context({'info': record})
+			rendered  = self.render_template(tmpl, context)
+			self.assertEqual(rendered, "/admin/testapp/inforecord/%d/"%record.pk)
