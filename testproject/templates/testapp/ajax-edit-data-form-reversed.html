@@ -1,0 +1,37 @@
+<script type="text/javascript" src="/media/js/jquery.js"></script>
+<script type="text/javascript" src="/media/js/jquery.ui.js"></script>
+<script type="text/javascript" src="/media/js/jquery.form.js"></script>
+
+<script type="text/javascript">
+	var form_options = {
+		target: "#reverse_form_container",
+		success: show_edit_form_response,
+		url: '{% url testapp-ajax-edit-startpage_reversed %}'
+	};
+
+	  function disable() {
+		$('input').attr('disabled', 'disabled');
+		$('textarea').attr('disabled', 'disabled');
+		$('button').attr('disabled', 'disabled');
+	  }
+
+	function show_edit_form_response(responseText)
+	{
+		$('#form_container').html(responseText);
+	};
+	
+	$('#form_subm_btn').click(
+		function ()
+		{
+			$('#msg').html('Saving form...');
+			$('#id_edit_form').ajaxSubmit(form_options);
+			disable();
+		}
+	);
+</script>
+<div id="msg">{{msg|safe}}</div>
+<form method="post" action="{% url testapp-edit-startpage %}" name="edit-form" id="id_edit_form">
+{% csrf_token %}
+<div class="two_col_div">{{form.as_p}}</div>
+<button type="button" id="form_subm_btn">Save</button>&nbsp;&nbsp;<a href="{% url testapp_startpage %}">Cancel</a>
+</form>
