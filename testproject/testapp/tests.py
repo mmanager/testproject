@@ -4,10 +4,12 @@ from tddspry.django import HttpTestCase
 from tddspry.django.helpers import *
 
 from django.template import Context, Template
+from django.contrib.contenttypes.models import ContentType
 
 
 import settings
-from testproject.testapp.models import InfoRecord, RequestStore
+from testproject.testapp.models import InfoRecord, RequestStore, DatabaseLog, log_event, log_event_delete
+
 import datetime
 
 
@@ -244,3 +246,38 @@ class TestCustomTemplateTags(TestCase):
 			context = Context({'info': record})
 			rendered  = self.render_template(tmpl, context)
 			self.assertEqual(rendered, "/admin/testapp/inforecord/%d/"%record.pk)
+
+class TestCustomSignalsProcessor(TestCase):
+	"""
+		Test custom signal processor for ticket #10
+	"""
+	def test_signals(self):
+		record = InfoRecord.objects.create(first_name=TEST_FIRST_NAME,
+							 last_name=TEST_LAST_NAME,
+							 bio=TEST_BIO,
+							 birthdate=TEST_BIRTH_DATE,
+							 email=TEST_EMAIL,
+							 jabber=TEST_JABBER,
+							 skype=TEST_SKYPE,
+							 other_contacts=TEST_OTHER_CONTACTS
+							 )
+		ct = ContentType.objects.get_for_model(record)
+		
+		## test add signal
+		objects = DatabaseLog.objects.filter(content_type=ct, object_id=record.pk, action_flag=1)		
+		self.assertTrue(objects.count() > 0)
+		
+		## test change signal
+		objects = DatabaseLog.objects.filter(content_type=ct, object_id=record.pk, action_flag=2)		
+		self.assertTrue(objects.count() == 0)
+		record.first_name = NEW_TEST_FIRST_NAME
+		record.save()
+		objects = DatabaseLog.objects.filter(content_type=ct, object_id=record.pk, action_flag=2)		
+		self.assertTrue(objects.count() > 0)
+		
+		## test delete signal
+		pk = record.pk
+		record.delete()
+		objects = DatabaseLog.objects.filter(content_type=ct, object_id=pk, action_flag=3)
+		self.assertTrue(objects.count() > 0)
+		

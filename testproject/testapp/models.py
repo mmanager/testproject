@@ -108,7 +108,7 @@ def log_event(sender, *args, **kwargs):
 			DatabaseLog.objects.log_action(ct.pk, instance.pk, instance.__repr__(), 2)
 
 @receiver(signals.post_delete)
-def log_event(sender, *args, **kwargs):
+def log_event_delete(sender, *args, **kwargs):
 	"""
 		listen signal for store deleting event
 	"""
